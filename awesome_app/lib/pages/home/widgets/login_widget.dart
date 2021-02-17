@@ -1,5 +1,6 @@
 import 'package:awesome_app/theme/colors.dart';
 import 'package:awesome_app/theme/typography.dart';
+import 'package:awesome_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -57,19 +58,9 @@ class _LoginWidgetState extends State<LoginWidget> {
             style: AppTextStyle.superSmallRegular,
           ),
           SizedBox(height: 24.0),
-          FlatButton(
-            minWidth: double.infinity,
-            child: const Text(
-              'Continue',
-              style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
-            ),
+          PrimaryButton(
+            text: 'Continue',
             onPressed: () => {},
-            padding: EdgeInsets.symmetric(vertical: 16),
-            color: AppColors.primaryColor,
-            textColor: Colors.white,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(8.0),
-            ),
           ),
         ],
       ),
