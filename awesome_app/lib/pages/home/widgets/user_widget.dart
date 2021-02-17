@@ -2,7 +2,6 @@ import 'package:awesome_app/pages/home/widgets/login_widget.dart';
 import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class UserWidget extends StatefulWidget {
   @override
@@ -16,7 +15,7 @@ class _UserWidgetState extends State<UserWidget> {
       appBar: AppBar(
         title: Text(
           'Your profile',
-          style: GoogleFonts.lato(textStyle: AppTextStyle.title1),
+          style: AppTextStyle.font(textStyle: AppTextStyle.title1),
         ),
       ),
       body: Container(

@@ -1,8 +1,11 @@
 import 'package:awesome_app/theme/colors.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTextStyle {
   // Title
+
+  static final font = GoogleFonts.lato;
 
   static const TextStyle title1 = TextStyle(
     fontSize: 28.0,

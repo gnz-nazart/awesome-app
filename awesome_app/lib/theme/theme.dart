@@ -1,3 +1,4 @@
+import 'package:awesome_app/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,11 +9,7 @@ final ThemeData lightTheme = ThemeData(
       color: Colors.white,
       elevation: 0.0,
       iconTheme: IconThemeData.fallback(),
-      titleTextStyle: TextStyle(
-        color: Colors.black,
-        fontSize: 26,
-        fontWeight: FontWeight.bold,
-      ),
+      titleTextStyle: AppTextStyle.title1,
     ),
     backgroundColor: const Color(0xffffffff),
     dialogBackgroundColor: const Color(0xffffffff),
