@@ -1,3 +1,4 @@
+import 'package:awesome_app/theme/colors.dart';
 import 'package:awesome_app/theme/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,6 +14,7 @@ final ThemeData lightTheme = ThemeData(
     ),
     backgroundColor: const Color(0xffffffff),
     dialogBackgroundColor: const Color(0xffffffff),
-    primarySwatch: Colors.blue,
+    primarySwatch: AppColors.primaryColor,
+    primaryColor: AppColors.primaryColor,
     scaffoldBackgroundColor: const Color(0xffffffff),
     textTheme: GoogleFonts.latoTextTheme());
