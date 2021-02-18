@@ -45,9 +45,7 @@ class _LoginWidgetState extends State<LoginWidget> {
           ),
           SizedBox(height: 16.0),
           TextField(
-            autofocus: true,
             decoration: InputDecoration(
-              border: OutlineInputBorder(),
               prefix: null,
               labelText: 'Phone number',
             ),

@@ -3,9 +3,6 @@ import 'package:awesome_app/theme/typography.dart';
 import 'package:flutter/material.dart';
 
 class AppButton extends FlatButton {
-  static const double defaultBorderRadius = 8.0;
-  static const double defaultHeight = 48.0;
-
   AppButton({
     @required String text,
     Color textColor,
@@ -27,9 +24,6 @@ class AppButton extends FlatButton {
             color: color,
             onPressed: onPressed,
             padding: padding,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(defaultBorderRadius),
-            ),
             height: height,
             minWidth: minWidth);
 }
@@ -46,9 +40,7 @@ class PrimaryButton extends AppButton {
             color: AppColors.primaryColor,
             textColor: Colors.white,
             onPressed: onPressed,
-            padding: padding,
-            height: AppButton.defaultHeight,
-            minWidth: double.infinity);
+            padding: padding);
 }
 
 class LinkButton extends AppButton {
