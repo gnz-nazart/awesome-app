@@ -1,5 +1,5 @@
-import 'package:awesome_app/theme/colors.dart';
 import 'package:awesome_app/theme/typography.dart';
+import 'package:awesome_app/widgets/bottom_sheet.dart';
 import 'package:awesome_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
 
@@ -17,36 +17,11 @@ class _LoginWidgetState extends State<LoginWidget> {
         borderRadius: BorderRadius.vertical(top: Radius.circular(16.0)),
         color: Colors.white,
       ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+      child: AppBottomSheet(
+        title: 'Sign in or sign up',
         children: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              Container(
-                width: 48,
-                height: 4,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(25),
-                  color: AppColors.grey[400],
-                ),
-              )
-            ],
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              CloseButton(
-                color: AppColors.grey[500],
-              ),
-              Text('Sign in or sign up', style: AppTextStyle.title4),
-              SizedBox(width: 48.0)
-            ],
-          ),
-          SizedBox(height: 16.0),
           TextField(
             decoration: InputDecoration(
-              prefix: null,
               labelText: 'Phone number',
             ),
           ),

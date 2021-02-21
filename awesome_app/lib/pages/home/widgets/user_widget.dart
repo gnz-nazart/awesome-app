@@ -26,24 +26,27 @@ class _UserWidgetState extends State<UserWidget> {
                   'Log in to start enjoying the complete awesome app experience.',
                   style: AppTextStyle.normalRegular),
               Container(
-                padding: EdgeInsets.symmetric(vertical: 24),
+                padding: EdgeInsets.symmetric(vertical: 16.0),
                 child: PrimaryButton(
                   text: 'Log in',
                   onPressed: () => _openLogin(),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    'Don\'t have an account?',
-                    style: AppTextStyle.normalRegular,
-                  ),
-                  LinkButton(
-                    text: 'Sign up',
-                    onPressed: () => _openLogin(),
-                  )
-                ],
-              )
+              Container(
+                constraints: BoxConstraints(maxHeight: 20),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      'Don\'t have an account?',
+                      style: AppTextStyle.normalRegular,
+                    ),
+                    LinkButton(
+                      text: 'Sign up',
+                      onPressed: () => _openLogin(),
+                    )
+                  ],
+                ),
+              ),
             ],
           )),
     );

@@ -16,7 +16,7 @@ final ThemeData lightTheme = ThemeData(
   backgroundColor: const Color(0xffffffff),
   brightness: Brightness.light,
   buttonTheme: ButtonThemeData(
-    height: 48.0,
+    height: 48,
     minWidth: double.infinity,
     shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
   ),
