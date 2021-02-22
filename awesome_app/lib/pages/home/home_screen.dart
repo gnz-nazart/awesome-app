@@ -68,11 +68,11 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
             icon: Padding(
                 padding: EdgeInsets.only(top: 6, bottom: 6),
-                child: SvgPicture.asset('images/icons/loupe.svg',
+                child: SvgPicture.asset('assets/images/icons/loupe.svg',
                     height: iconHeight, width: iconWidth, color: defaultColor)),
             activeIcon: Padding(
                 padding: EdgeInsets.only(top: 6, bottom: 6),
-                child: SvgPicture.asset('images/icons/loupe.svg',
+                child: SvgPicture.asset('assets/images/icons/loupe.svg',
                     height: iconHeight,
                     width: iconWidth,
                     color: activeIconColor)),
@@ -81,13 +81,13 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/like.svg',
+                  child: SvgPicture.asset('assets/images/icons/like.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: defaultColor)),
               activeIcon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/like.svg',
+                  child: SvgPicture.asset('assets/images/icons/like.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: activeIconColor)),
@@ -95,13 +95,13 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/placeholder.svg',
+                  child: SvgPicture.asset('assets/images/icons/placeholder.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: defaultColor)),
               activeIcon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/placeholder.svg',
+                  child: SvgPicture.asset('assets/images/icons/placeholder.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: activeIconColor)),
@@ -109,13 +109,13 @@ class _HomeScreenState extends State<HomeScreen> {
           BottomNavigationBarItem(
               icon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/user.svg',
+                  child: SvgPicture.asset('assets/images/icons/user.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: defaultColor)),
               activeIcon: Padding(
                   padding: EdgeInsets.only(top: 6, bottom: 6),
-                  child: SvgPicture.asset('images/icons/user.svg',
+                  child: SvgPicture.asset('assets/images/icons/user.svg',
                       height: iconHeight,
                       width: iconWidth,
                       color: activeIconColor)),

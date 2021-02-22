@@ -1,6 +1,7 @@
 import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/bottom_sheet.dart';
 import 'package:awesome_app/widgets/buttons.dart';
+import 'package:awesome_app/widgets/country_sheet.dart';
 import 'package:flutter/material.dart';
 
 class LoginWidget extends StatefulWidget {
@@ -33,10 +34,24 @@ class _LoginWidgetState extends State<LoginWidget> {
           SizedBox(height: 24.0),
           PrimaryButton(
             text: 'Continue',
-            onPressed: () => {},
+            onPressed: () => _openPrefixSelector(),
           ),
         ],
       ),
+    );
+  }
+
+  void _openPrefixSelector() {
+    showModalBottomSheet(
+      isScrollControlled: true,
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (BuildContext context) {
+        return FractionallySizedBox(
+          heightFactor: 0.9,
+          child: CountrySelector(),
+        );
+      },
     );
   }
 }
