@@ -1,4 +1,6 @@
 import 'package:awesome_app/services/country_service.dart';
+import 'package:awesome_app/theme/colors.dart';
+import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
@@ -40,8 +42,13 @@ class _CountrySelectorState extends State<CountrySelector> {
             final name = country.name;
             final prefix = country.dialCode;
             return ListTile(
-              title: Text('$name ($prefix)'),
-            );
+                title: Text(
+                  '$name ($prefix)',
+                  style: AppTextStyle.normalRegular,
+                ),
+                trailing: country.isoCode == 'ES'
+                    ? Icon(Icons.check, color: AppColors.grey[800])
+                    : null);
           },
         );
       },

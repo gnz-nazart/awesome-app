@@ -55,10 +55,14 @@ class _UserWidgetState extends State<UserWidget> {
 
   void _openLogin() {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return LoginWidget();
+        return FractionallySizedBox(
+          heightFactor: 0.75,
+          child: LoginWidget(),
+        );
       },
     );
   }
