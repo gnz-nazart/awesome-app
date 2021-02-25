@@ -1,8 +1,11 @@
+import 'dart:math';
+
 import 'package:awesome_app/services/country_service.dart';
 import 'package:awesome_app/theme/colors.dart';
 import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
+import 'package:scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class CountrySelector extends StatefulWidget {
   @override
@@ -10,6 +13,25 @@ class CountrySelector extends StatefulWidget {
 }
 
 class _CountrySelectorState extends State<CountrySelector> {
+  ItemScrollController _scrollController = ItemScrollController();
+  String _selectedCountryIsoCode = 'ES'; // Heredar y devolver este valor
+  List<Country> _countries = [];
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  int get _selectedItemIndex {
+    for (var i = 0; i < _countries.length; i++) {
+      if (_countries[i].isoCode.toLowerCase() ==
+          _selectedCountryIsoCode.toLowerCase()) {
+        return i;
+      }
+    }
+    return -1;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -30,15 +52,16 @@ class _CountrySelectorState extends State<CountrySelector> {
   }
 
   Widget buildCountriesList() {
-    return FutureBuilder(
+    var builder = FutureBuilder(
       builder: (context, snapshot) {
         if (snapshot.connectionState != ConnectionState.done) {
           return SizedBox();
         }
-        return ListView.builder(
+        var list = ScrollablePositionedList.builder(
+          itemScrollController: _scrollController,
           itemCount: snapshot.data.length,
           itemBuilder: (context, index) {
-            Country country = snapshot.data[index];
+            final Country country = snapshot.data[index];
             final name = country.name;
             final prefix = country.dialCode;
             return ListTile(
@@ -46,13 +69,29 @@ class _CountrySelectorState extends State<CountrySelector> {
                   '$name ($prefix)',
                   style: AppTextStyle.normalRegular,
                 ),
-                trailing: country.isoCode == 'ES'
+                trailing: country.isoCode == _selectedCountryIsoCode
                     ? Icon(Icons.check, color: AppColors.grey[800])
                     : null);
           },
         );
+        WidgetsBinding.instance.addPostFrameCallback((_) {
+          _scrollToIndex(_selectedItemIndex);
+        });
+        return list;
       },
-      future: CountryService.getCountriesData(),
+      future: _loadData(),
     );
+    return builder;
+  }
+
+  Future _loadData() async {
+    _countries = await CountryService.getCountriesData();
+    return _countries;
+  }
+
+  _scrollToIndex(int index) {
+    _scrollController.scrollTo(
+        index: max(_selectedItemIndex - 4, 0),
+        duration: Duration(milliseconds: 300));
   }
 }
