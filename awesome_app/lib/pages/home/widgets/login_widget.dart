@@ -96,10 +96,12 @@ class _LoginWidgetState extends State<LoginWidget> {
         );
       },
     ).then((value) {
-      setState(() {
-        _phoneCountryDialCode = value.dialCode;
-        _phoneCountryIsoCode = value.isoCode;
-      });
+      if (value != null) {
+        setState(() {
+          _phoneCountryDialCode = value.dialCode;
+          _phoneCountryIsoCode = value.isoCode;
+        });
+      }
     });
   }
 }
