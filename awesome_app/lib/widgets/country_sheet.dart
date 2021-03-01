@@ -13,7 +13,10 @@ class CountrySelector extends StatefulWidget {
 }
 
 class _CountrySelectorState extends State<CountrySelector> {
-  ItemScrollController _scrollController = ItemScrollController();
+  final ItemScrollController _scrollController = ItemScrollController();
+  final ItemPositionsListener _positionsListener =
+      ItemPositionsListener.create();
+
   String _selectedCountryIsoCode = 'ES'; // Heredar y devolver este valor
   List<Country> _countries = [];
 
@@ -59,24 +62,29 @@ class _CountrySelectorState extends State<CountrySelector> {
         }
         var list = ScrollablePositionedList.builder(
           itemScrollController: _scrollController,
+          itemPositionsListener: _positionsListener,
           itemCount: snapshot.data.length,
+          initialScrollIndex: max(_selectedItemIndex - 4, 0),
           itemBuilder: (context, index) {
             final Country country = snapshot.data[index];
             final name = country.name;
             final prefix = country.dialCode;
             return ListTile(
-                title: Text(
-                  '$name ($prefix)',
-                  style: AppTextStyle.normalRegular,
-                ),
-                trailing: country.isoCode == _selectedCountryIsoCode
-                    ? Icon(Icons.check, color: AppColors.grey[800])
-                    : null);
+              title: Text(
+                '$name ($prefix)',
+                style: AppTextStyle.normalRegular,
+              ),
+              trailing: country.isoCode == _selectedCountryIsoCode
+                  ? Icon(Icons.check, color: AppColors.grey[800])
+                  : null,
+              onTap: () => {
+                setState(() {
+                  Navigator.of(context, rootNavigator: true).pop(country);
+                })
+              },
+            );
           },
         );
-        WidgetsBinding.instance.addPostFrameCallback((_) {
-          _scrollToIndex(_selectedItemIndex);
-        });
         return list;
       },
       future: _loadData(),
@@ -85,13 +93,8 @@ class _CountrySelectorState extends State<CountrySelector> {
   }
 
   Future _loadData() async {
-    _countries = await CountryService.getCountriesData();
+    if (_countries.isEmpty)
+      _countries = await CountryService.getCountriesData();
     return _countries;
-  }
-
-  _scrollToIndex(int index) {
-    _scrollController.scrollTo(
-        index: max(_selectedItemIndex - 4, 0),
-        duration: Duration(milliseconds: 300));
   }
 }

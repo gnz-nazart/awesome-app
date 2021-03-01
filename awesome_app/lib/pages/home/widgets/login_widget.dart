@@ -11,6 +11,9 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
+  String _phoneCountryIsoCode = 'ES';
+  String _phoneCountryDialCode = '+34';
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -33,7 +36,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   padding: EdgeInsets.only(right: 24),
                   child: RawMaterialButton(
                     constraints:
-                        const BoxConstraints(maxWidth: 94.0, maxHeight: 32),
+                        const BoxConstraints(maxWidth: 110.0, maxHeight: 32),
                     splashColor: Colors.transparent,
                     highlightColor: Colors.transparent,
                     child: Row(
@@ -44,13 +47,13 @@ class _LoginWidgetState extends State<LoginWidget> {
                           borderRadius: BorderRadius.circular(3.0),
                           clipBehavior: Clip.hardEdge,
                           child: Image.network(
-                            'https://flagcdn.com/w40/es.png',
+                            'https://flagcdn.com/w40/${_phoneCountryIsoCode.toLowerCase()}.png',
                             width: 24,
                           ),
                         ),
                         Padding(
                           padding: EdgeInsets.fromLTRB(10, 0, 4, 0),
-                          child: Text('+34',
+                          child: Text(_phoneCountryDialCode,
                               style: AppTextStyle.normalRegular,
                               textAlign: TextAlign.right),
                         ),
@@ -92,6 +95,11 @@ class _LoginWidgetState extends State<LoginWidget> {
           child: CountrySelector(),
         );
       },
-    );
+    ).then((value) {
+      setState(() {
+        _phoneCountryDialCode = value.dialCode;
+        _phoneCountryIsoCode = value.isoCode;
+      });
+    });
   }
 }
