@@ -1,4 +1,4 @@
-import 'package:awesome_app/pages/home/widgets/login_widget.dart';
+import 'package:awesome_app/pages/home/widgets/login_widget/login_widget.dart';
 import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
