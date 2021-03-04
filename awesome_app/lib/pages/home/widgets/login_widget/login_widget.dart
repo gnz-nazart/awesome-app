@@ -3,7 +3,7 @@ import 'package:awesome_app/pages/home/widgets/login_widget/widgets/verification
 import 'package:awesome_app/widgets/bottom_sheet.dart';
 import 'package:flutter/material.dart';
 
-enum Step { phone, verification }
+enum Step { phone, verification, verified }
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -11,7 +11,8 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  var _currentStep = Step.phone;
+  Step _currentStep = Step.phone;
+  String _phoneNumber = '';
 
   @override
   Widget build(BuildContext context) {
@@ -39,9 +40,10 @@ class _LoginWidgetState extends State<LoginWidget> {
         ? PhoneFormWidget(
             onSubmit: (phone) {
               _currentStep = Step.verification;
+              _phoneNumber = phone;
               setState(() {});
             },
           )
-        : VerificationFormWidget();
+        : VerificationFormWidget(phoneNumber: _phoneNumber);
   }
 }

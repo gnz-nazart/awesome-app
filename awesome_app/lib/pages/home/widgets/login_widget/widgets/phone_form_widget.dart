@@ -23,6 +23,12 @@ class _PhoneFormWidgetState extends State<PhoneFormWidget> {
       TextEditingController(text: '637279124');
 
   @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(children: <Widget>[
       ConstrainedBox(
@@ -67,7 +73,7 @@ class _PhoneFormWidgetState extends State<PhoneFormWidget> {
             ),
             labelText: 'Phone number',
           ),
-          keyboardType: TextInputType.phone,
+          keyboardType: TextInputType.number,
         ),
       ),
       SizedBox(height: 8.0),

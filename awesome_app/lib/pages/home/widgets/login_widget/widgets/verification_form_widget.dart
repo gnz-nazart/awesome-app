@@ -4,6 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 class VerificationFormWidget extends StatefulWidget {
+  final String phoneNumber;
+
+  VerificationFormWidget({
+    @required this.phoneNumber,
+  });
+
   @override
   _VerificationFormWidgetState createState() => _VerificationFormWidgetState();
 }
@@ -12,20 +18,35 @@ class _VerificationFormWidgetState extends State<VerificationFormWidget> {
   TextEditingController _textController = TextEditingController();
 
   @override
+  void initState() {
+    super.initState();
+    _textController.addListener(_verify);
+  }
+
+  @override
+  void dispose() {
+    _textController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: <Widget>[
         Text(
-          'Enter the code we have sent you by SMS to\n637 27 91 24',
+          'Enter the code we have sent you by SMS to\n${widget.phoneNumber}',
           style: AppTextStyle.normalRegular,
           textAlign: TextAlign.left,
         ),
         Padding(
           padding: EdgeInsets.symmetric(vertical: 16),
           child: TextField(
+            decoration: InputDecoration(counterText: ''),
             controller: _textController,
             autofocus: true,
+            keyboardType: TextInputType.number,
+            maxLength: 6,
           ),
         ),
         Container(
@@ -42,5 +63,11 @@ class _VerificationFormWidgetState extends State<VerificationFormWidget> {
         ),
       ],
     );
+  }
+
+  _verify() {
+    if (_textController.text.length == 4) {
+      print(true);
+    }
   }
 }
