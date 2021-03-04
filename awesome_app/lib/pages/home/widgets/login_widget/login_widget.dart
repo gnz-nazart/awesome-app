@@ -1,9 +1,9 @@
-import 'package:awesome_app/theme/colors.dart';
-import 'package:awesome_app/theme/typography.dart';
+import 'package:awesome_app/pages/home/widgets/login_widget/widgets/phone_form_widget.dart';
+import 'package:awesome_app/pages/home/widgets/login_widget/widgets/verification_form_widget.dart';
 import 'package:awesome_app/widgets/bottom_sheet.dart';
-import 'package:awesome_app/widgets/buttons.dart';
-import 'package:awesome_app/widgets/country_sheet.dart';
 import 'package:flutter/material.dart';
+
+enum Step { phone, verification }
 
 class LoginWidget extends StatefulWidget {
   @override
@@ -11,8 +11,7 @@ class LoginWidget extends StatefulWidget {
 }
 
 class _LoginWidgetState extends State<LoginWidget> {
-  String _phoneCountryIsoCode = 'ES';
-  String _phoneCountryDialCode = '+34';
+  var _currentStep = Step.phone;
 
   @override
   Widget build(BuildContext context) {
@@ -23,85 +22,26 @@ class _LoginWidgetState extends State<LoginWidget> {
         color: Colors.white,
       ),
       child: AppBottomSheet(
-        title: 'Sign in or sign up',
-        children: <Widget>[
-          ConstrainedBox(
-            constraints: BoxConstraints(
-              maxHeight: 56.0,
-            ),
-            child: TextField(
-              autofocus: true,
-              decoration: InputDecoration(
-                prefix: Padding(
-                  padding: EdgeInsets.only(right: 24),
-                  child: RawMaterialButton(
-                    constraints:
-                        const BoxConstraints(maxWidth: 110.0, maxHeight: 32),
-                    splashColor: Colors.transparent,
-                    highlightColor: Colors.transparent,
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      children: <Widget>[
-                        ClipRRect(
-                          borderRadius: BorderRadius.circular(3.0),
-                          clipBehavior: Clip.hardEdge,
-                          child: Image.network(
-                            'https://flagcdn.com/w40/${_phoneCountryIsoCode.toLowerCase()}.png',
-                            width: 24,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.fromLTRB(10, 0, 4, 0),
-                          child: Text(_phoneCountryDialCode,
-                              style: AppTextStyle.normalRegular,
-                              textAlign: TextAlign.right),
-                        ),
-                        Icon(Icons.arrow_drop_down,
-                            color: AppColors.grey[700], size: 24)
-                      ],
-                    ),
-                    onPressed: () => _openPrefixSelector(),
-                  ),
-                ),
-                labelText: 'Phone number',
-              ),
-              keyboardType: TextInputType.phone,
-            ),
-          ),
-          SizedBox(height: 8.0),
-          Text(
-            'We will call or send you an SMS to confirm your number. Standard message and data rates apply.',
-            style: AppTextStyle.superSmallRegular,
-          ),
-          SizedBox(height: 24.0),
-          PrimaryButton(
-            text: 'Continue',
-            onPressed: null,
-          ),
-        ],
+        title: _title,
+        children: <Widget>[_bodyWidget],
       ),
     );
   }
 
-  void _openPrefixSelector() {
-    showModalBottomSheet(
-      isScrollControlled: true,
-      context: context,
-      backgroundColor: Colors.transparent,
-      builder: (BuildContext context) {
-        return FractionallySizedBox(
-          heightFactor: 0.95,
-          child: CountrySelector(),
-        );
-      },
-    ).then((value) {
-      if (value != null) {
-        setState(() {
-          _phoneCountryDialCode = value.dialCode;
-          _phoneCountryIsoCode = value.isoCode;
-        });
-      }
-    });
+  get _title {
+    return _currentStep == Step.phone
+        ? 'Sign in or sign up'
+        : 'Confirm your phone number';
+  }
+
+  get _bodyWidget {
+    return _currentStep == Step.phone
+        ? PhoneFormWidget(
+            onSubmit: (phone) {
+              _currentStep = Step.verification;
+              setState(() {});
+            },
+          )
+        : VerificationFormWidget();
   }
 }

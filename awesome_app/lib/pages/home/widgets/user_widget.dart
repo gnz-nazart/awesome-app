@@ -59,7 +59,7 @@ class _UserWidgetState extends State<UserWidget> {
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
         return FractionallySizedBox(
-          heightFactor: 0.75,
+          heightFactor: 0.80,
           child: LoginWidget(),
         );
       },
