@@ -58,11 +58,10 @@ class _UserWidgetState extends State<UserWidget> {
       context: context,
       backgroundColor: Colors.transparent,
       builder: (BuildContext context) {
-        return FractionallySizedBox(
-          heightFactor: 0.80,
-          child: LoginWidget(),
-        );
+        return LoginWidget();
       },
-    );
+    ).then((value) {
+      print(value);
+    });
   }
 }

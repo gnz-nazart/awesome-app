@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:awesome_app/theme/typography.dart';
 import 'package:awesome_app/widgets/buttons.dart';
 import 'package:flutter/material.dart';
@@ -5,9 +7,11 @@ import 'package:flutter/services.dart';
 
 class VerificationFormWidget extends StatefulWidget {
   final String phoneNumber;
+  final Function(String) onSuccess;
 
   VerificationFormWidget({
     @required this.phoneNumber,
+    @required this.onSuccess,
   });
 
   @override
@@ -46,7 +50,7 @@ class _VerificationFormWidgetState extends State<VerificationFormWidget> {
             controller: _textController,
             autofocus: true,
             keyboardType: TextInputType.number,
-            maxLength: 6,
+            maxLength: 4,
           ),
         ),
         Container(
@@ -67,7 +71,10 @@ class _VerificationFormWidgetState extends State<VerificationFormWidget> {
 
   _verify() {
     if (_textController.text.length == 4) {
-      print(true);
+      widget.onSuccess(json.encode({
+        'name': 'Gonz',
+        'uid': 'vaina',
+      }));
     }
   }
 }
